@@ -1,20 +1,30 @@
+import React, { useState } from "react";
 import "./App.css";
-import Navbar from "./compoments/Navbar";
-import BookList from "./compoments/BookList";
-import { useState } from "react";
-import { Routes,Route } from "react-router";
-import BooksDetail from "./compoments/BooksDetail";
+import Navbar from "./Components/Navbar";
+import ShowData from "./Components/ShowData";
+import RenderSelected from "./Components/RenderSelected";
 
-function App() {
-   const [searchQuery, setSearchQuery] = useState("");
+const App = () => {
+  const [apiData, setApiData] = useState([]);
+  const [value, setValue] = useState("");
+  const [selected, setSelected] = useState("");
+
   return (
-    <div className="main">
-      <Navbar setSearchQuery={setSearchQuery} />
-      <BookList searchQuery={searchQuery } />
-        
-     
+    <div className="container">
+      <Navbar
+        setValue={setValue}
+        setSelected={setSelected}
+        value={value}
+        setApiData={setApiData}
+      />
+      <RenderSelected selected={selected} />
+      <ShowData
+        apiData={apiData}
+        selected={selected}
+        setSelected={setSelected}
+      />
     </div>
   );
-}
+};
 
 export default App;
